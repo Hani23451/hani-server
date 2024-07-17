@@ -13,29 +13,20 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 // Swagger setup
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Example route
-/**
- * @swagger
- * /:
- *   get:
- *     summary: Welcome message
- *     responses:
- *       200:
- *         description: return hello world   .
- */
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-
 app.use("/auth", require("./routes/auth"));
 
-
-
+app.get("/", (req, res) => {
+  res.render("home", { name: "Chris Martin" });
+});
+app.get("/auth/login", (req, res) => {
+  res.render("auth/login", { name: "Chris Martin" });
+  // res.send('work')
+});
 DB.then((con) => {
   app.listen(process.env.PORT || 8080, () => {
     console.log(
