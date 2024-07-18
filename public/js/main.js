@@ -21,11 +21,12 @@ function toggleSidebar() {
 // make linke active
 function makeLinkActive() {
   const currentPath = window.location.pathname;
+  console.log(currentPath);
   const sidebarLinks = document.querySelectorAll("#sidebar a");
 
   sidebarLinks.forEach((link) => {
     if (link.getAttribute("href") === currentPath) {
-      link.classList.add("active");
-    }
+      link.classList.add("bg-gray-700");
+    } 
   });
 }

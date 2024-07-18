@@ -8,7 +8,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swager");
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,13 +20,11 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", require("./routes/auth"));
 
-app.get("/", (req, res) => {
-  res.render("pages/home", { name: "Chris Martin" });
-});
-app.get("/auth/login", (req, res) => {
-  res.render("auth/login", { name: "Chris Martin" });
-  // res.send('work')
-});
+// ui
+app.use(require("./routes/ui/index"));
+
+
+
 DB.then((con) => {
   app.listen(process.env.PORT || 8080, () => {
     console.log(
@@ -46,4 +44,4 @@ DB.then((con) => {
   );
 });
 
-module.exports = app;
+
