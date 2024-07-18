@@ -30,3 +30,36 @@ function makeLinkActive() {
     } 
   });
 }
+ 
+
+
+function showLoading() {
+  document.getElementById('loadingOverlay').style.display = 'flex';
+}
+
+// Function to hide the loading overlay
+function hideLoading() {
+  document.getElementById('loadingOverlay').style.display = 'none';
+}
+
+// Show loading spinner on form submit
+document.querySelectorAll('form').forEach(form => {
+  form.addEventListener('submit', function() {
+    showLoading();
+  });
+});
+
+// Show loading spinner on page navigation
+window.addEventListener('beforeunload', function() {
+  showLoading();
+});
+
+// For AJAX requests, show and hide loading spinner accordingly
+document.addEventListener('DOMContentLoaded', function() {
+  // Intercept fetch API requests
+  const originalFetch = fetch;
+  window.fetch = function(...args) {
+    showLoading();
+    return originalFetch(...args).finally(hideLoading);
+  };
+});
