@@ -1,0 +1,117 @@
+<aside
+  id="sidebar"
+  class="fixed inset-y-0 left-0 w-64 bg-gray-800 text-white transition-transform transform -translate-x-full sm:translate-x-0 sm:w-96 z-40"
+>
+  <div class="p-4 sm:py-4">
+    <h2
+      class="text-2xl ml-20 sm:ml-0 bg-gray-700 p-1 sm:bg-transparent sm:rounded-none sm:text-gray-300 sm:border-b sm:border-gray-700 rounded-md text-center font-bold"
+    >
+      Admin
+    </h2>
+    <nav class="mt-8">
+      <ul>
+        <li>
+          <a
+            href="/"
+            class="flex items-center justify-between py-4 px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+          >
+            <!-- SVG Icon (Example: Replace with your SVG URL) -->
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/doodle/48/group--v1.png"
+              alt="group--v1"
+            />
+            <!-- Text -->
+            <span class="text-2xl ml-3 font-semibold">Users</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/"
+            class="flex items-center justify-between py-4 px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+          >
+            <!-- SVG Icon (Example: Replace with your SVG URL) -->
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-packages-spa-flaticons-lineal-color-flat-icons-6.png"
+              alt="external-packages-spa-flaticons-lineal-color-flat-icons-6"
+            />
+            <!-- Text -->
+            <span class="text-2xl ml-3 font-semibold">Packages</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/"
+            class="flex items-center justify-between py-4 px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+          >
+            <!-- SVG Icon (Example: Replace with your SVG URL) -->
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-stories-computer-programming-flaticons-lineal-color-flat-icons.png"
+              alt="external-stories-computer-programming-flaticons-lineal-color-flat-icons"
+            />
+            <!-- Text -->
+            <span class="text-2xl ml-3 font-semibold">Stories</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/"
+            class="flex items-center justify-between py-4 px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+          >
+            <!-- SVG Icon (Example: Replace with your SVG URL) -->
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/dusk/64/questions.png"
+              alt="questions"
+            />
+            <!-- Text -->
+            <span class="text-2xl ml-3 font-semibold">Questions</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/"
+            class="flex items-center justify-between py-4 px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+          >
+            <!-- SVG Icon (Example: Replace with your SVG URL) -->
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/dusk/64/contact-card.png"
+              alt="contact-card"
+            />
+            <!-- Text -->
+            <span class="text-2xl ml-3 font-semibold">Contact Use</span>
+          </a>
+        </li>
+
+        <!-- Add more sidebar links as needed -->
+      </ul>
+    </nav>
+  </div>
+</aside>
+<button
+  id="sidebarToggle"
+  class="fixed top-4 left-4 p-2 bg-slate-900 shadow-sm text-white rounded sm:hidden z-50"
+>
+  <svg
+    class="h-6 w-6"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4 6h16M4 12h16M4 18h16"
+    ></path>
+  </svg>
+</button>

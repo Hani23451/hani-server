@@ -1,13 +1,13 @@
 const router = require("express").Router();
-const { Login, Register } = require("../../controllers/auth/index");
+const { Login, Register } = require("../../controllers/auth");
+const swaggerUi = require("swagger-ui-express");
 const {
   LoginValidator,
   RegisterValidator,
 } = require("../../utils/validators/auth");
-const swaggerUi = require("swagger-ui-express");
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: User login
  *     requestBody:
@@ -17,13 +17,27 @@ const swaggerUi = require("swagger-ui-express");
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               email:
  *                 type: string
  *               password:
  *                 type: string
  *     responses:
  *       200:
  *         description: Successful login.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/User'
+ *                     token:
+ *                       type: string
  *       401:
  *         description: Invalid credentials.
  */
@@ -31,7 +45,7 @@ router.post("/login", LoginValidator, Login);
 
 /**
  * @swagger
- * /auth/register:
+ * /api/auth/register:
  *   post:
  *     summary: User registration
  *     requestBody:
@@ -41,20 +55,35 @@ router.post("/login", LoginValidator, Login);
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               fullname:
+ *                 type: string
+ *               phone:
  *                 type: string
  *               password:
  *                 type: string
  *               email:
  *                 type: string
+ *               sex:
+ *                 type: string
+ *               age:
+ *                 type: number
  *     responses:
  *       201:
  *         description: User successfully registered.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *       409:
+ *         description: User already exists.
  *       400:
  *         description: Bad request.
  */
 router.post("/register", RegisterValidator, Register);
-// asdfvsdfv
-// asdfvsdfv
-// asdfvsdfv
+
 module.exports = router;

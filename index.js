@@ -8,7 +8,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swager");
 
 // Middleware
-app.use(express.static(path.join(__dirname, "images")));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,10 +18,10 @@ app.set("views", path.join(__dirname, "views"));
 // Swagger setup
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use("/auth", require("./routes/auth"));
+app.use("/api/auth", require("./routes/auth"));
 
 app.get("/", (req, res) => {
-  res.render("home", { name: "Chris Martin" });
+  res.render("pages/home", { name: "Chris Martin" });
 });
 app.get("/auth/login", (req, res) => {
   res.render("auth/login", { name: "Chris Martin" });
