@@ -31,10 +31,10 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", require("./routes/auth"));
-
+app.use("/api/user", require("./routes/user"));
 // ui
 app.use(require("./routes/ui/index"));
-app.use("/admin", require("./routes/admin/auth"));
+app.use("/admin", require("./routes/admin/index"));
 
 DB.then((con) => {
   app.listen(process.env.PORT || 8080, () => {
