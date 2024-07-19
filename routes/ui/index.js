@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const User = require("../../models/User"); 
-const  GemsBundle = require("../../models/GemsBundle");
+const User = require("../../models/User");
+const GemsBundle = require("../../models/GemsBundle");
+const Questions = require("../../models/Questions");
 const authAdminValidation = require("../../middlewares/adminValidation");
 router.get("/", authAdminValidation, (req, res) => {
   res.render("pages/home", { name: "Chris Martin" });
@@ -17,16 +18,16 @@ router.get("/users", authAdminValidation, async (req, res) => {
   }
 });
 
-router.get('/gems', authAdminValidation, async (req, res) => {
+router.get("/gems", authAdminValidation, async (req, res) => {
   try {
     // Fetch all GemsBundle data from the database
     const gemsBundles = await GemsBundle.find({});
-    
+
     // Pass the data to the EJS template
-    res.render('pages/gemsBundle', { gemsBundles });
+    res.render("pages/gemsBundle", { gemsBundles });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 router.get("/contact", authAdminValidation, async (req, res) => {
@@ -50,7 +51,8 @@ router.get("/stories", authAdminValidation, async (req, res) => {
 router.get("/question", authAdminValidation, async (req, res) => {
   try {
     // Fetch users from the database
-    res.render("pages/question"); // Pass users data to the EJS template
+    const questions = await Questions.find({});
+    res.render("pages/question", { questions }); // Pass users data to the EJS template
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");

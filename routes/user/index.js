@@ -1,10 +1,10 @@
 const router = require("express").Router();
 
-const {getAllGems}   = require('../../controllers/user/index')
- 
+const { getAllGems, getAllQuestions } = require("../../controllers/user/index");
+
 /**
  * @swagger
- * /gems:
+ * /user/gems:
  *   get:
  *     summary: Retrieve all gems bundles
  *     tags:
@@ -47,7 +47,40 @@ const {getAllGems}   = require('../../controllers/user/index')
  *       500:
  *         description: Internal server error
  */
-router.get('/gems', getAllGems);
+router.get("/gems", getAllGems);
 
+/**
+ * @swagger
+ * /user/questions:
+ *   get:
+ *     summary: Retrieve a list of all questions
+ *     description: Retrieve a list of questions along with their answers.
+ *     responses:
+ *       200:
+ *         description: A list of questions.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: The question ID.
+ *                     example: 60c72b2f4f1a2c001f8e4b1e
+ *                   question:
+ *                     type: string
+ *                     description: The question text.
+ *                     example: "What is the capital of France?"
+ *                   answer:
+ *                     type: string
+ *                     description: The answer to the question.
+ *                     example: "Paris"
+ *       500:
+ *         description: Internal server error.
+ */
+
+router.get("/questions", getAllQuestions);
 
 module.exports = router;
