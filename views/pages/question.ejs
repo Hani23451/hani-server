@@ -89,7 +89,7 @@
                     <label class="sr-only" for="answer">Answer</label>
                     <textarea
                       class="w-full border-2 font-mono sm:text-xl rounded-lg border-gray-500 p-3 text-md text-slate-900"
-                      placeholder="question"
+                      placeholder="answer"
                       type="text"
                       name="answer"
                       id="answer"
@@ -135,22 +135,23 @@
                 class="bg-white relative rounded-lg shadow-md overflow-hidden"
               >
                 <div class="p-4">
-                  <h3 class="text-xl font-semibold text-gray-800">
+                  <h3
+                    class="text-lg font-semibold break-words mr-16 text-gray-800"
+                  >
                     <%= question.question %>
                   </h3>
                   <button
-                    class="mt-2 px-4 py-2 bg-indigo-500 text-white rounded-lg"
+                    class="mt-2 px-4 py-2 bg-indigo-500 text-white rounded-lg break-words"
                     onclick="toggleAnswer('<%= question._id %>')"
                   >
                     Show Answer
                   </button>
                   <div
-                  id="answer-<%= question._id %>"
-                  class="mt-4 hidden text-gray-600 break-words"
-                >
-                  <%= question.answer %>
-                </div>
-                
+                    id="answer-<%= question._id %>"
+                    class="mt-4 hidden text-gray-600 break-words"
+                  >
+                    <%= question.answer %>
+                  </div>
                 </div>
                 <button
                   data-id="<%= question._id %>"

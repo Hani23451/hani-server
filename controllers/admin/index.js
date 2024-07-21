@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const GemsBundle = require("../../models/GemsBundle");
 const Questions = require("../../models/Questions");
 const Settings = require("../../models/Settings");
+const Stories = require("../../models/Stories");
 exports.AdminLogin = asyncHandler(async (req, res, next) => {
   console.log(req.body);
   const { email, password } = req.body;
@@ -125,3 +126,40 @@ exports.createContact = asyncHandler(async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+exports.createStory = async (req, res) => {
+  try {
+    const { name, content, jewelCount, isPaid } = req.body;
+
+    // Create a new story instance
+    const newStory = new Stories({
+      name,
+      content,
+      jewelCount,
+      isPaid: isPaid === "true", // Convert string to boolean
+    });
+
+    // Save the story to the database
+    await newStory.save();
+    console.log(newStory);
+    // Redirect to the stories page or wherever you want
+    res.redirect("/stories");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+}; 
+exports.deleteStory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Find and delete the story by ID
+    await Stories.findByIdAndDelete(id);
+    
+    // Redirect to the stories page
+    res.redirect('/stories');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+};

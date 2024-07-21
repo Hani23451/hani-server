@@ -4,6 +4,8 @@ const {
   getAllGems,
   getAllQuestions,
   createComplaint,
+  getContacts,
+  getStories,
 } = require("../../controllers/user/index");
 
 /**
@@ -184,4 +186,114 @@ router.get("/questions", getAllQuestions);
  */
 
 router.post("/create-Complaint", createComplaint);
+/**
+ * @swagger
+ * /user/get-contacts:
+ *   get:
+ *     summary: Retrieve a list of all contacts
+ *     description: Retrieve a list of all contacts, including their names, email addresses, and messages.
+ *     tags:
+ *       - Contacts
+ *     responses:
+ *       200:
+ *         description: A list of contacts.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: The unique identifier for the contact.
+ *                     example: "607c35f7a4d0b0b11c0e5d3e"
+ *                   name:
+ *                     type: string
+ *                     description: The name of the contact.
+ *                     example: "Jane Doe"
+ *                   email:
+ *                     type: string
+ *                     description: The email address of the contact.
+ *                     example: "jane.doe@example.com"
+ *                   message:
+ *                     type: string
+ *                     description: The message from the contact.
+ *                     example: "I have a question about your service."
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The date and time when the contact was created.
+ *                     example: "2024-07-21T15:21:00Z"
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The date and time when the contact was last updated.
+ *                     example: "2024-07-21T15:21:00Z"
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: "Server error occurred."
+ */
+router.get("/get-contacts", getContacts);
+/**
+ * @swagger
+ * /api/user/get-stories:
+ *   get:
+ *     summary: Retrieve a list of all stories
+ *     description: Retrieve a list of stories with their details.
+ *     tags:
+ *       - Stories
+ *     responses:
+ *       200:
+ *         description: A list of stories.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: The story ID.
+ *                     example: 60c72b2f4f1a2c001f8e4b1e
+ *                   name:
+ *                     type: string
+ *                     description: The name of the story.
+ *                     example: "The Adventure Begins"
+ *                   Content:
+ *                     type: string
+ *                     description: The content of the story.
+ *                     example: "Once upon a time..."
+ *                   jewelCount:
+ *                     type: number
+ *                     description: The number of jewels required to unlock the story.
+ *                     example: 5
+ *                   isPaid:
+ *                     type: boolean
+ *                     description: Indicates if the story is paid or free.
+ *                     example: true
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The date and time when the story was created.
+ *                     example: "2024-07-21T15:21:00Z"
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The date and time when the story was last updated.
+ *                     example: "2024-07-21T15:21:00Z"
+ *       500:
+ *         description: Internal server error.
+ */
+router.get("/get-stories", getStories);
+
 module.exports = router;

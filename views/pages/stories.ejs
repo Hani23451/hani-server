@@ -3,16 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
+    <title>Stories</title>
     <link href="/css/main.css" rel="stylesheet" />
   </head>
   <body class="bg-gray-200 text-gray-900">
-    <%- include('../partials/Logo.ejs') %>
-    <%- include('../partials//Loader.ejs') %>
+    <%- include('../partials/Logo.ejs') %> <%- include('../partials/Loader.ejs')
+    %>
     <div class="flex">
       <%- include('../partials/SideBar.ejs') %>
-      <main class="flex-1 p-4 ml-16 mt-40 sm:ml-96">
-        <div class=" ">Stories</div>
+      <main class="flex-1 p-4 mt-40 sm:ml-96">
+        <h1 class="text-right text-2xl font-bold mb-6">Stories</h1>
+        <!-- Add Story Form -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+          <div class="flex justify-end">
+            <h2 class="text-xl bg-slate-100 p-2 rounded-md font-semibold mb-4">
+              Add a New Story
+            </h2>
+          </div>
+          <form action="/admin/add-stroy" method="POST" class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="mt-1 block w-full p-2 border-2 border-gray-300 rounded-md shadow-sm"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="content"
+                class="block text-sm font-medium text-gray-700"
+                >Content</label
+              >
+              <textarea
+                id="content"
+                name="content"
+                rows="9"
+                class="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm"
+                required
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="jewelCount"
+                class="block text-sm font-medium text-gray-700"
+                >Jewel Count</label
+              >
+              <input
+                type="number "
+                id="jewelCount"
+                name="jewelCount"
+                class="mt-1 block w-full p-1 border-2 border-gray-300 rounded-md shadow-sm"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="isPaid"
+                class="block text-sm font-medium text-gray-700"
+                >Is Paid?</label
+              >
+              <select
+                id="isPaid"
+                name="isPaid"
+                class="mt-1 p-2 block w-full border-2 border-gray-300 rounded-md shadow-sm"
+                required
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white"
+            >
+              Add Story
+            </button>
+          </form>
+        </section>
+        <section class="bg-white p-6 rounded-lg mt-8 shadow-md">
+          <div class="flex justify-center sm:justify-end">
+            <h2 class="bg-slate-100 p-2 rounded-md text-xl font-semibold mb-4">
+              Stories List
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <% stories.forEach(story => { %>
+            <div class="bg-white rounded-lg shadow-md p-4 border-2 relative">
+              <h3 class="text-xl font-semibold mb-2"><%= story.name %></h3>
+              <p class="text-gray-600 mb-2 break-words my-7">
+                <%= story.content.length > 100 ? story.content.slice(0, 100) +
+                '...' : story.content %>
+              </p>
+              <form
+                action="/admin/stories/delete/<%= story._id %>"
+                method="POST"
+                class="absolute top-0 right-0 m-4"
+              >
+                <button
+                  type="submit"
+                  class="bg-red-500 text-white px-4 py-2 rounded-lg"
+                >
+                  Delete
+                </button>
+              </form>
+            </div>
+            <% }) %>
+          </div>
+        </section>
       </main>
     </div>
     <script src="/js/main.js"></script>
