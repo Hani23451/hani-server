@@ -1,6 +1,10 @@
 const router = require("express").Router();
 
-const { getAllGems, getAllQuestions } = require("../../controllers/user/index");
+const {
+  getAllGems,
+  getAllQuestions,
+  createComplaint,
+} = require("../../controllers/user/index");
 
 /**
  * @swagger
@@ -83,4 +87,101 @@ router.get("/gems", getAllGems);
 
 router.get("/questions", getAllQuestions);
 
+/**
+ * @swagger
+ * /user/create-Complaint:
+ *   post:
+ *     summary: Create a new complaint
+ *     description: Endpoint to create a new complaint. Requires name, email, and message in the request body.
+ *     tags:
+ *       - Complaints
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Name of the person making the complaint.
+ *                 example: John Doe
+ *               email:
+ *                 type: string
+ *                 description: Email address of the person making the complaint.
+ *                 example: john.doe@example.com
+ *               message:
+ *                 type: string
+ *                 description: The content of the complaint.
+ *                 example: "I am not happy with the service."
+ *             required:
+ *               - name
+ *               - email
+ *               - message
+ *     responses:
+ *       201:
+ *         description: Complaint created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message.
+ *                   example: "Complaint created successfully."
+ *                 complaint:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       description: The unique identifier for the complaint.
+ *                       example: "607d0d5c3f2e1c001f6471d7"
+ *                     name:
+ *                       type: string
+ *                       description: Name of the person making the complaint.
+ *                       example: "John Doe"
+ *                     email:
+ *                       type: string
+ *                       description: Email address of the person making the complaint.
+ *                       example: "john.doe@example.com"
+ *                     message:
+ *                       type: string
+ *                       description: The content of the complaint.
+ *                       example: "I am not happy with the service."
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The date and time when the complaint was created.
+ *                       example: "2024-07-21T15:21:00Z"
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The date and time when the complaint was last updated.
+ *                       example: "2024-07-21T15:21:00Z"
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: "Validation error: Missing required fields."
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: "Server error occurred."
+ */
+
+router.post("/create-Complaint", createComplaint);
 module.exports = router;

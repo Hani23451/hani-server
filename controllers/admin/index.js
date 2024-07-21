@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const GemsBundle = require("../../models/GemsBundle");
 const Questions = require("../../models/Questions");
+const Settings = require("../../models/Settings");
 exports.AdminLogin = asyncHandler(async (req, res, next) => {
   console.log(req.body);
   const { email, password } = req.body;
@@ -54,7 +55,7 @@ exports.createQuestion = asyncHandler(async (req, res) => {
   }
 
   try {
-    const newQuestion = await Questions.create({ question, answer }); 
+    const newQuestion = await Questions.create({ question, answer });
     console.log(newQuestion);
     res
       .status(201)
@@ -67,7 +68,7 @@ exports.createQuestion = asyncHandler(async (req, res) => {
     });
   }
 });
-exports.deleteQuestion= async (req, res) => {
+exports.deleteQuestion = async (req, res) => {
   try {
     const { id } = req.params;
     await Questions.findByIdAndDelete(id);
@@ -92,3 +93,35 @@ exports.deleteGemsBundle = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+exports.createContact = asyncHandler(async (req, res) => {
+  try {
+    const { tiktok, facebook, instagram, youtube, snapchat } = req.body;
+    let settings = await Settings.findOne();
+
+    if (settings) {
+      // Update existing settings
+      settings.tiktok = tiktok;
+      settings.facebook = facebook;
+      settings.instagram = instagram;
+      settings.youtube = youtube;
+      settings.snapchat = snapchat;
+    } else {
+      // Create new settings
+      settings = new Settings({
+        tiktok,
+        facebook,
+        instagram,
+        youtube,
+        snapchat,
+      });
+    }
+
+    await settings.save();
+    console.log(settings);
+    res.redirect("/contact");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});

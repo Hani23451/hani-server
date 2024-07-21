@@ -2,6 +2,8 @@ const router = require("express").Router();
 const User = require("../../models/User");
 const GemsBundle = require("../../models/GemsBundle");
 const Questions = require("../../models/Questions");
+const Settings = require("../../models/Settings");
+const Complaints = require("../../models/Complaints");
 const authAdminValidation = require("../../middlewares/adminValidation");
 router.get("/", authAdminValidation, (req, res) => {
   res.render("pages/home", { name: "Chris Martin" });
@@ -31,9 +33,13 @@ router.get("/gems", authAdminValidation, async (req, res) => {
   }
 });
 router.get("/contact", authAdminValidation, async (req, res) => {
-  try {
-    // Fetch users from the database
-    res.render("pages/contact"); // Pass users data to the EJS template
+  try { 
+
+    const settings = await Settings.findOne();
+    const complaints = await Complaints.find();   
+    console.log('from contact page');
+    console.log(complaints.length);
+    res.render("pages/contact", { settings, complaints }); // Pass settings data to the EJS template
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");
