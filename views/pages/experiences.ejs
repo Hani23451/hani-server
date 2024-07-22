@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiences</title>
+    <link href="/css/main.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-200 text-gray-900">
+    <%- include('../partials/Logo.ejs') %>
+
+    <div class="flex">
+      <%- include('../partials/SideBar.ejs') %>
+      <main class="flex-1 p-4 mt-40 sm:ml-96">
+        <!-- Admin Experience Management -->
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold mb-4">Add New Experience</h2>
+          <form
+            action="/admin/add-experience"
+            method="POST"
+            class="bg-white p-6 rounded-lg shadow-md"
+          >
+            <div class="mb-4">
+              <label for="name" class="block text-gray-700"
+                >Experience Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full px-3 py-2 border border-gray-300 rounded"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="content" class="block text-gray-700">Content</label>
+              <textarea
+                id="content"
+                name="content"
+                class="w-full px-3 py-2 border border-gray-300 rounded"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Add Experience
+            </button>
+          </form>
+        </div>
+
+        <!-- User Experience Submission -->
+
+        <!-- Display Experiences -->
+      </main>
+    </div>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

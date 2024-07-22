@@ -54,6 +54,15 @@ router.get("/stories", authAdminValidation, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+router.get("/experiences", authAdminValidation, async (req, res) => {
+  try {
+
+    res.render("pages/experiences"); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
 router.get("/question", authAdminValidation, async (req, res) => {
   try {
     // Fetch users from the database

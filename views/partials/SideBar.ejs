@@ -1,6 +1,6 @@
 <aside
   id="sidebar"
-  class="fixed inset-y-0 left-0 w-64 bg-gray-800 text-white transition-transform transform -translate-x-full sm:translate-x-0 sm:w-96 z-40"
+  class="fixed h-screen overflow-auto inset-y-0 left-0 w-64 bg-gray-800 text-white transition-transform transform -translate-x-full sm:translate-x-0 sm:w-96 z-40"
 >
   <div class="p-4 sm:py-4">
     <h2
@@ -22,17 +22,17 @@
               alt="group--v1"
             />
             <!-- Text -->
-            <span class=" text-lg sm:text-2xl ml-3 font-semibold">Users</span>
+            <span class="text-lg sm:text-2xl ml-3 font-semibold">Users</span>
           </a>
         </li>
         <li class="my-3">
           <a
             href="/"
-            class="flex items-center justify-between  py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+            class="flex items-center justify-between py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
           >
             <!-- SVG Icon (Example: Replace with your SVG URL) -->
             <img
-            class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
+              class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
               src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-packages-spa-flaticons-lineal-color-flat-icons-6.png"
               alt="external-packages-spa-flaticons-lineal-color-flat-icons-6"
             />
@@ -43,11 +43,11 @@
         <li class="my-3">
           <a
             href="/gems"
-            class="flex items-center justify-between  py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+            class="flex items-center justify-between py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
           >
             <!-- SVG Icon (Example: Replace with your SVG URL) -->
             <svg
-            class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
+              class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
               version="1.1"
               id="Layer_1"
               xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@
           >
             <!-- SVG Icon (Example: Replace with your SVG URL) -->
             <img
-            class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
+              class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
               src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-stories-computer-programming-flaticons-lineal-color-flat-icons.png"
               alt="external-stories-computer-programming-flaticons-lineal-color-flat-icons"
             />
@@ -183,17 +183,62 @@
         </li>
         <li class="my-3">
           <a
+            href="/experiences"
+            class="flex items-center justify-between py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+          >
+            <!-- SVG Icon (Example: Replace with your SVG URL) -->
+            <svg 
+              class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="user-square" transform="translate(-2 -2)">
+                  <path
+                    id="secondary"
+                    fill="#2ca9bc"
+                    d="M20,3H4A1,1,0,0,0,3,4V20a1,1,0,0,0,1,1H7V20a5,5,0,0,1,5-5,4,4,0,1,1,4-4,4,4,0,0,1-4,4,5,5,0,0,1,5,5v1h3a1,1,0,0,0,1-1V4A1,1,0,0,0,20,3Z"
+                  ></path>
+                  <path
+                    id="primary"
+                    d="M12,15h0a5,5,0,0,0-5,5v1H17V20A5,5,0,0,0,12,15Zm0-8a4,4,0,1,0,4,4A4,4,0,0,0,12,7Zm8,14H4a1,1,0,0,1-1-1V4A1,1,0,0,1,4,3H20a1,1,0,0,1,1,1V20A1,1,0,0,1,20,21Z"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+            <!-- Text -->
+            <span class="text-lg sm:text-2xl ml-3 font-semibold"
+              >Experiences</span
+            >
+          </a>
+        </li>
+        <li class="my-3">
+          <a
             href="/question"
-            class="flex items-center justify-between  py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
+            class="flex items-center justify-between py-2 px-2 sm:py-4 sm:px-4 text-gray-300 hover:bg-gray-700 hover:text-white <?php if($activePage =='home'){echo 'active';}?>"
           >
             <!-- SVG Icon (Example: Replace with your SVG URL) -->
             <img
-            class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
+              class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
               src="https://img.icons8.com/dusk/64/questions.png"
               alt="questions"
             />
             <!-- Text -->
-            <span class="text-lg sm:text-2xl ml-3 font-semibold">Questions</span>
+            <span class="text-lg sm:text-2xl ml-3 font-semibold"
+              >Questions</span
+            >
           </a>
         </li>
         <li class="my-3">
@@ -203,12 +248,14 @@
           >
             <!-- SVG Icon (Example: Replace with your SVG URL) -->
             <img
-            class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
+              class="w-[28px] h-[28px] sm:w-[48px] sm:h-[48px]"
               src="https://img.icons8.com/dusk/64/contact-card.png"
               alt="contact-card"
             />
             <!-- Text -->
-            <span class="text-lg sm:text-2xl ml-3 font-semibold">Contact Use</span>
+            <span class="text-lg sm:text-2xl ml-3 font-semibold"
+              >Contact Use</span
+            >
           </a>
         </li>
 

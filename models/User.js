@@ -28,6 +28,18 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+
+    relationshipStatus: {
+      type: String,
+      enum: ["pending", "accepted", "completed"],
+    },
+    partner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // Reference to the User model
+    },
+    linkedWord: {
+      type: String,
+    },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields

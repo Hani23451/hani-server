@@ -6,7 +6,10 @@ const {
   createComplaint,
   getContacts,
   getStories,
+  linkCouples,
+  createRelationship,
 } = require("../../controllers/user/index");
+const verifyToken = require("../../middlewares/verifyToken");
 
 /**
  * @swagger
@@ -296,4 +299,239 @@ router.get("/get-contacts", getContacts);
  */
 router.get("/get-stories", getStories);
 
+/**
+ * @swagger
+ * /api/user/linkCouples:
+ *   post:
+ *     summary: Link two user accounts
+ *     description: This endpoint links two user accounts based on a linkedWord. If both users have the same linkedWord, their relationship status is set to "accepted".
+ *     tags:
+ *       - User
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               linkedWord:
+ *                 type: string
+ *                 description: The word used to link two user accounts.
+ *                 example: "magicword"
+ *     responses:
+ *       200:
+ *         description: Successfully linked users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful.
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   description: A message describing the result of the operation.
+ *                   example: "linked successfully"
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: A message describing the error.
+ *                   example: "linkedWord is required"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: A message describing the error.
+ *                   example: "Invalid authorization"
+ *       404:
+ *         description: Not Found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: A message describing the error.
+ *                   example: "User not found"
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: A message describing the error.
+ *                   example: "Server Error"
+ */
+
+router.post("/linkCouples", verifyToken, linkCouples);
+
+/**
+ * @swagger
+ * /api/user/create-relation:
+ *   post:
+ *     summary: Create a new relationship between the current user and their partner
+ *     description: Endpoint to create a new relationship. The partner is determined from the user's `partner` field. The relationship status of both users is updated to "completed".
+ *     tags:
+ *       - Relationships
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               engagementDate:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of the engagement.
+ *                 example: "2024-07-20"
+ *               marriageDate:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of the marriage.
+ *                 example: "2024-12-25"
+ *               proposalDate:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of the proposal.
+ *                 example: "2024-06-15"
+ *     responses:
+ *       '201':
+ *         description: Relationship created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Success status.
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   description: Success message.
+ *                   example: "Relationship created successfully"
+ *                 relationship:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       description: The unique identifier for the relationship.
+ *                       example: "60c72b2f4f1a2c001f8e4b1f"
+ *                     user1:
+ *                       type: string
+ *                       description: The ID of the first user.
+ *                       example: "60c72b2f4f1a2c001f8e4b1e"
+ *                     user2:
+ *                       type: string
+ *                       description: The ID of the second user (partner).
+ *                       example: "60c72b2f4f1a2c001f8e4b1d"
+ *                     engagementDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Date of the engagement.
+ *                       example: "2024-07-20"
+ *                     marriageDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Date of the marriage.
+ *                       example: "2024-12-25"
+ *                     proposalDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Date of the proposal.
+ *                       example: "2024-06-15"
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The date and time when the relationship was created.
+ *                       example: "2024-07-21T15:21:00Z"
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The date and time when the relationship was last updated.
+ *                       example: "2024-07-21T15:21:00Z"
+ *       '400':
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Success status.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: "Partner not found for the user."
+ *       '404':
+ *         description: User or partner not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Success status.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: "User or partner not found."
+ *       '500':
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Success status.
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: "Server error occurred."
+ */
+
+router.post("/create-relation", verifyToken, createRelationship);
 module.exports = router;
