@@ -20,7 +20,7 @@ router.delete("/delete-question/:id", deleteQuestion);
 router.post("/add-contact", createContact);
 router.post("/add-stroy", createStory);
 router.post("/add-experience", addExperience);
-// create questions
+
 router.post("/create-question", createQuestion);
 router.post("/stories/delete/:id", deleteStory);
 router.post("/delete-experience/:id", deleteExperience);
